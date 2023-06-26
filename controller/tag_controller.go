@@ -21,6 +21,13 @@ func NewTagsController(service service.TagsService) *TagsController {
 	}
 }
 
+// FindAll			godoc
+// @Summary			FindAll tags
+// @Description		Return all the tags from the data.
+// @Produce			application/json
+// @Tags			tags
+// @Success			200 {object} response.Response{}
+// @Router			/tags [get]
 func (controller *TagsController) FindAll(c *gin.Context) {
 
 	tagsResponse := controller.tagsService.FindAll()
@@ -34,6 +41,14 @@ func (controller *TagsController) FindAll(c *gin.Context) {
 	c.JSON(http.StatusOK, webResponse)
 }
 
+// FindById			godoc
+// @Summary			FindById tags
+// @Description		Return a single tag
+// @Param			tagId path int true "return tags by id"
+// @Produce			application/json
+// @Tags			tags
+// @Success			200 {object} response.Response{}
+// @Router			/tags/{tagId} [get]
 func (controller *TagsController) FindById(c *gin.Context) {
 
 	tagId := c.Param("tagId")
@@ -51,6 +66,14 @@ func (controller *TagsController) FindById(c *gin.Context) {
 	c.JSON(http.StatusOK, webResponse)
 }
 
+// CreateTags		godoc
+// @Summary			Create tags
+// @Description		Save tags data in DB.
+// @Param			tags body request.CreateTagsRequest true "Create tags"
+// @Produce			application/json
+// @Tags			tags
+// @Success			200 {object} response.Response{}
+// @Router			/tags [post]
 func (controller *TagsController) Create(c *gin.Context) {
 	createTagsRequest := request.CreateTagsRequest{}
 	err := c.ShouldBindJSON(&createTagsRequest)
@@ -66,6 +89,15 @@ func (controller *TagsController) Create(c *gin.Context) {
 	c.JSON(http.StatusOK, webResponse)
 }
 
+// UpdateTags		godoc
+// @Summary			Update tags
+// @Description		Update tags data in DB.
+// @Param			tags body request.UpdateTagsRequest true "Update tags"
+// @Param			tagId path int true "update tags by id"
+// @Produce			application/json
+// @Tags			tags
+// @Success			200 {object} response.Response{}
+// @Router			/tags/{tagId} [patch]
 func (controller *TagsController) Update(c *gin.Context) {
 	updateTagsRequest := request.UpdateTagsRequest{}
 	err := c.ShouldBindJSON(&updateTagsRequest)
@@ -88,6 +120,14 @@ func (controller *TagsController) Update(c *gin.Context) {
 
 }
 
+// DeleteTags		godoc
+// @Summary			Delete tags
+// @Description		Delete tags data in DB.
+// @Param			tagId path int true "update tags by id"
+// @Produce			application/json
+// @Tags			tags
+// @Success			200 {object} response.Response{}
+// @Router			/tags/{tagId} [delete]
 func (controller *TagsController) Delete(c *gin.Context) {
 	tagId := c.Param("tagId")
 	id, err := strconv.Atoi(tagId)

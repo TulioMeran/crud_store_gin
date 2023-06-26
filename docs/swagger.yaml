@@ -1,0 +1,132 @@
+basePath: /api
+definitions:
+  request.CreateTagsRequest:
+    properties:
+      name:
+        maxLength: 200
+        minLength: 1
+        type: string
+    required:
+    - name
+    type: object
+  request.UpdateTagsRequest:
+    properties:
+      id:
+        type: integer
+      name:
+        maxLength: 200
+        minLength: 1
+        type: string
+    required:
+    - id
+    - name
+    type: object
+  response.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      status:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: A Tag service API in Go using Gin framework
+  title: Tag Service API
+  version: "1.0"
+paths:
+  /tags:
+    get:
+      description: Return all the tags from the data.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: FindAll tags
+      tags:
+      - tags
+    post:
+      description: Save tags data in DB.
+      parameters:
+      - description: Create tags
+        in: body
+        name: tags
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateTagsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Create tags
+      tags:
+      - tags
+  /tags/{tagId}:
+    delete:
+      description: Delete tags data in DB.
+      parameters:
+      - description: update tags by id
+        in: path
+        name: tagId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Delete tags
+      tags:
+      - tags
+    get:
+      description: Return a single tag
+      parameters:
+      - description: return tags by id
+        in: path
+        name: tagId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: FindById tags
+      tags:
+      - tags
+    patch:
+      description: Update tags data in DB.
+      parameters:
+      - description: Update tags
+        in: body
+        name: tags
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdateTagsRequest'
+      - description: update tags by id
+        in: path
+        name: tagId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Update tags
+      tags:
+      - tags
+swagger: "2.0"

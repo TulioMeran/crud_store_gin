@@ -3,6 +3,7 @@ package main
 import (
 	"crud_store_gin/config"
 	"crud_store_gin/controller"
+	_ "crud_store_gin/docs"
 	"crud_store_gin/models"
 	"crud_store_gin/repository"
 	"crud_store_gin/router"
@@ -13,6 +14,11 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
+// @title 	Tag Service API
+// @version 1.0
+// @description	A Tag service API in Go using Gin framework
+// @host localhost:8080
+// @basePath /api
 func main() {
 
 	//Database
